@@ -1,0 +1,19 @@
+---
+import { skills } from '@/data/profile';
+import SectionHead from './SectionHead.astro';
+---
+
+<section class="border-b border-line py-16 md:py-24">
+  <SectionHead title="Como eu construo" label="05 — Competências" />
+  <div class="grid grid-cols-1 border border-line md:grid-cols-4">
+    {
+      skills.map((skill, i) => (
+        <div class="min-h-[145px] border-line p-6 not-last:border-b md:not-last:border-r md:not-last:border-b-0">
+          <span class="font-mono text-[11px] text-green">{String(i + 1).padStart(2, '0')}</span>
+          <b class="mt-5 block text-[17px] tracking-[-0.04em]">{skill.title}</b>
+          <p class="mt-2 text-xs text-muted">{skill.items.join(' · ')}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

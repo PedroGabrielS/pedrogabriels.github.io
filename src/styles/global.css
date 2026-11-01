@@ -1,0 +1,28 @@
+/* Tailwind v4: import único + tokens de design via @theme */
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #10231f;
+  --color-paper: #f7f5ef;
+  --color-line: #d9ddd3;
+  --color-green: #1d5c4d;
+  --color-lime: #c8f169;
+  --color-soft: #e9eee5;
+  --color-muted: #60716a;
+
+  --font-sans: "Manrope", ui-sans-serif, system-ui, Arial, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-paper text-ink font-sans antialiased;
+}
+
+/* Rótulo monoespaçado usado em várias seções (eyebrow / numeração) */
+.label {
+  @apply font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-green;
+}

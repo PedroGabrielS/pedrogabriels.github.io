@@ -1,0 +1,46 @@
+---
+import { experiences, education } from '@/data/profile';
+import SectionHead from './SectionHead.astro';
+---
+
+<section id="experiencia" class="border-b border-line py-16 md:py-24">
+  <SectionHead title="Trajetória" label="04 — Experiência" />
+  <ol class="divide-y divide-line border-y border-line">
+    {
+      experiences.map((exp) => (
+        <li class="grid gap-4 py-8 md:grid-cols-[.35fr_.65fr] md:gap-10">
+          <div>
+            <span class="label">{exp.period}</span>
+            <h3 class="mt-2 text-xl font-extrabold tracking-[-0.04em]">{exp.company}</h3>
+            <p class="text-sm text-muted">
+              {exp.role}
+              {exp.location && ` · ${exp.location}`}
+            </p>
+          </div>
+          <ul class="space-y-2 text-sm leading-relaxed">
+            {exp.highlights.map((h) => (
+              <li class="flex gap-3">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-green" />
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="mt-10 grid gap-4 md:grid-cols-[.35fr_.65fr] md:gap-10">
+    <span class="label">Formação</span>
+    <ul class="space-y-2 text-sm">
+      {
+        education.map((e) => (
+          <li>
+            <b>{e.institution}</b> · {e.degree}
+            <span class="text-muted"> ({e.period})</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

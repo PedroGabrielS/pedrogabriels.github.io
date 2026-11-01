@@ -1,0 +1,35 @@
+---
+import type { Project } from '@/data/profile';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const featured = project.featured ?? false;
+---
+
+<a
+  href={`#projeto-${project.slug}`}
+  class:list={[
+    'group flex min-h-[330px] flex-col justify-between border p-6 transition-transform duration-200 hover:-translate-y-1 hover:shadow-[7px_8px_0_var(--color-lime)]',
+    featured ? 'border-green bg-green text-white' : 'border-line bg-white',
+  ]}
+>
+  <div>
+    <span class:list={['label', featured && 'text-lime']}>{project.context}</span>
+    <h3 class="mt-4 mb-2 text-2xl font-extrabold tracking-[-0.05em]">{project.title}</h3>
+    <p class="text-sm leading-relaxed">{project.description}</p>
+  </div>
+  <div class="mt-6">
+    <ul class="flex flex-wrap gap-2">
+      {
+        project.tags.map((tag) => (
+          <li class="rounded-full border border-current px-2 py-1.5 font-mono text-[10px] font-medium uppercase opacity-80">
+            {tag}
+          </li>
+        ))
+      }
+    </ul>
+    <span class="mt-4 block font-mono text-[11px] opacity-70 group-hover:opacity-100">Ver detalhes ↓</span>
+  </div>
+</a>

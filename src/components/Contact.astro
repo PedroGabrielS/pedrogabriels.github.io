@@ -1,0 +1,21 @@
+---
+import { profile } from '@/data/profile';
+import Button from './Button.astro';
+---
+
+<section id="contato" class="border-b border-line py-24 md:pt-24 md:pb-28">
+  <span class="label">06 — Contato</span>
+  <h2 class="my-4 mb-8 max-w-[800px] text-[clamp(37px,5vw,65px)] leading-[1.04] font-extrabold tracking-[-0.07em]">
+    Tem uma operação complexa que precisa de software melhor?
+  </h2>
+  <a
+    href={`mailto:${profile.email}`}
+    class="inline-block border-b-2 border-green pb-1 text-lg font-bold hover:text-green"
+  >
+    {profile.email} ↗
+  </a>
+  <div class="mt-8 flex flex-wrap gap-3">
+    <Button href={profile.linkedin} variant="outline" external>LinkedIn ↗</Button>
+    {profile.github && <Button href={profile.github} variant="outline" external>GitHub ↗</Button>}
+  </div>
+</section>

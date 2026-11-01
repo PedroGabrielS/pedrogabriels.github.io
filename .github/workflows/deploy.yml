@@ -1,0 +1,51 @@
+# Publica o site no GitHub Pages a cada push na branch main.
+# Em Settings > Pages do repositório, escolha "Source: GitHub Actions".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # SITE e BASE são derivados do nome do repositório:
+      # - repo "usuario.github.io" => base "/"
+      # - qualquer outro nome      => base "/<nome-do-repo>"
+      - name: Resolve SITE/BASE for GitHub Pages
+        run: |
+          OWNER="${GITHUB_REPOSITORY_OWNER,,}"
+          REPO="${GITHUB_REPOSITORY#*/}"
+          echo "SITE=https://${OWNER}.github.io" >> "$GITHUB_ENV"
+          if [ "${REPO,,}" = "${OWNER}.github.io" ]; then
+            echo "BASE=/" >> "$GITHUB_ENV"
+          else
+            echo "BASE=/${REPO}" >> "$GITHUB_ENV"
+          fi
+
+      - uses: withastro/action@v4
+        with:
+          node-version: 24
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

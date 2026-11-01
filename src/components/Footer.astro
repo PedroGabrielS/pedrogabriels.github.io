@@ -1,0 +1,9 @@
+---
+import { profile } from '@/data/profile';
+const year = new Date().getFullYear();
+---
+
+<footer class="flex flex-col gap-3 py-6 font-mono text-[11px] text-muted md:flex-row md:justify-between">
+  <span>© {year} · {profile.name}</span>
+  <span>{profile.location}</span>
+</footer>

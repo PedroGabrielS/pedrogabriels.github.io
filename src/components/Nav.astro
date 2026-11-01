@@ -1,0 +1,19 @@
+---
+import { profile } from '@/data/profile';
+
+const links = [
+  { href: '#sobre', label: 'Sobre' },
+  { href: '#projetos', label: 'Projetos' },
+  { href: '#experiencia', label: 'Experiência' },
+  { href: '#contato', label: 'Contato' },
+];
+---
+
+<nav class="flex h-[82px] items-center justify-between border-b border-line">
+  <a href="#top" class="text-xl font-extrabold tracking-[-0.05em]">
+    {profile.shortName}<span class="text-green">.</span>
+  </a>
+  <div class="hidden gap-6 text-[13px] font-bold md:flex">
+    {links.map((l) => <a href={l.href} class="hover:text-green">{l.label}</a>)}
+  </div>
+</nav>
